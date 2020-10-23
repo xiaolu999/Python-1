@@ -1,10 +1,35 @@
-import tkinter
+import jieba
+try:
+
+    excludes = {'将军', '却说', '主公', '荆州', '二人', '不可', '不能', '如此'}
+    with open('三国演义.txt', 'r')as file:
+        txt = file.read()
+    words = jieba.lcut(txt)
+    counts = {}
+    for word in excludes:
+        if len(word) == 1:
+            continue
+        elif word == '诸葛亮' or word == '孔明曰':
+            rword = '孔明'
+        elif word == '关公' or word == '云长':
+            rword = '关羽'
+        elif word == '玄德' or word == '玄德曰':
+            rword = '刘备'
+        elif word == '孟德' or word == '孟德曰':
+            rword = '曹操'
+        else:
+            rword = word
+        counts[rword] = counts.get(rword, 0)+1
+    for word in excludes:
+        del(counts[word])
+    items = list(counts.items())
+    items.sort(key=lambda x: x[1], reverse=True)
+    for i in range(9):
+        word, count = items[i]
+        print('{0:<10} {1:5}'.format(word, count))
+except Exception as r:
+    print(r)
 
 
-windows = tkinter.Tk()
-windows.title('金企鹅')
-c = tkinter.Label(windows,text = '你好呀',fg = 'blue',bg = 'red',font = ('宋体'),width = 20,height = 4)
-c.pack()
-windows.geometry('400x500')
 
-windows.mainloop()
+
