@@ -16,6 +16,7 @@ class Cat:
 
     def attack(self,dog):      #猫的攻击
         dog.life -= self.aggressivity
+        print('猫打了狗')
     def eat(self):
         self.life += 50
     def die(self):
@@ -40,6 +41,7 @@ class Dog:
 
     def attack(self,cat):      #狗的攻击
         cat.life -=self.aggressivity
+        print('狗打了猫')
     def eat(self):
         self.life += 40
     def die(self):
@@ -47,6 +49,8 @@ class Dog:
             print(self.name, '已经被打死了')
         else:
             print(self.name, '的血量还有',self.life)
+
+
 cat_1 = Cat('小辉','波斯猫')
 dog_1 = Dog('小蓝','哈士奇')
 dog_1.die()
@@ -73,7 +77,7 @@ while True:
     else:
         print('平局了')
         break
-#s = input('是否继续 1继续or 2退出')
+
 
 
 
